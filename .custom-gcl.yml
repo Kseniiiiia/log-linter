@@ -1,0 +1,7 @@
+version: v2.8.0
+name: linter-custom
+
+plugins:
+  - module: "log-linter"
+    import: "log-linter/plugin"
+    path: .

@@ -1,0 +1,21 @@
+rules:
+  lowercase:
+    enabled: true
+    options: {}
+
+  english:
+    enabled: true
+    options: {}
+
+  symbols:
+    enabled: true
+    options:
+      allowed: [".", "-", "_", "/", ":", "=", ",", "%"]
+
+  sensitive:
+    enabled: true
+    options:
+      patterns:
+        - "(?i)\\b(password|passwd|pwd)\\b"
+        - "(?i)\\b(api[_-]?key|apikey)\\b"
+        - "(?i)\\btoken\\b"

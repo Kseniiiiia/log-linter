@@ -1,0 +1,34 @@
+version: "2"
+
+issues:
+  uniq-by-line: false
+  max-same-issues: 0
+  fix: true
+
+linters:
+  default: none
+  enable:
+    - log-linter
+
+  settings:
+    custom:
+      log-linter:
+        type: "module"
+        description: "Checks log messages for lowercase, English, no emojis, no sensitive data"
+        settings:
+          rules:
+            lowercase:
+              enabled: true
+            english:
+              enabled: true
+            symbols:
+              enabled: true
+              options:
+                allowed: [".", "-", "_", "/", ":", "=", ",", "%"]
+            sensitive:
+              enabled: true
+              options:
+                patterns:
+                  - "(?i)\\b(password|passwd|pwd)\\b"
+                  - "(?i)\\b(api[_-]?key|apikey)\\b"
+                  - "(?i)\\btoken\\b"
