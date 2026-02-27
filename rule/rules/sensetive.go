@@ -3,6 +3,7 @@ package rules
 import (
 	"fmt"
 	"go/token"
+	"log"
 	"regexp"
 
 	"golang.org/x/tools/go/analysis"
@@ -78,5 +79,7 @@ func (r *SensitiveRule) Check(msg string, pos token.Pos) []analysis.Diagnostic {
 }
 
 func init() {
-	rule.Global.Register(SensitiveName, NewSensitiveRule)
+	if err := rule.Global.Register(SensitiveName, NewSensitiveRule); err != nil {
+		log.Printf("failed to register rule %q: %v", SensitiveName, err)
+	}
 }

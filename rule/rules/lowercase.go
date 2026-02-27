@@ -2,6 +2,7 @@ package rules
 
 import (
 	"go/token"
+	"log"
 	"unicode"
 
 	"golang.org/x/tools/go/analysis"
@@ -44,5 +45,7 @@ func (r *LowercaseRule) Check(msg string, pos token.Pos) []analysis.Diagnostic {
 }
 
 func init() {
-	rule.Global.Register(LowercaseName, NewLowercaseRule)
+	if err := rule.Global.Register(LowercaseName, NewLowercaseRule); err != nil {
+		log.Printf("failed to register rule %q: %v", LowercaseName, err)
+	}
 }

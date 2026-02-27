@@ -2,6 +2,7 @@ package rules
 
 import (
 	"go/token"
+	"log"
 	"unicode"
 
 	"golang.org/x/tools/go/analysis"
@@ -67,5 +68,7 @@ func (r *SymbolsRule) Check(msg string, pos token.Pos) []analysis.Diagnostic {
 }
 
 func init() {
-	rule.Global.Register(SymbolsName, NewSymbolsRule)
+	if err := rule.Global.Register(SymbolsName, NewSymbolsRule); err != nil {
+		log.Printf("failed to register rule %q: %v", SymbolsName, err)
+	}
 }

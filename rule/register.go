@@ -20,15 +20,16 @@ func NewRegistry() *Registry {
 	}
 }
 
-func (r *Registry) Register(name string, factory Factory) {
+func (r *Registry) Register(name string, factory Factory) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
 	if _, ok := r.factories[name]; ok {
-		panic(fmt.Sprintf("rule %q already registered", name))
+		return fmt.Errorf("rule %q already registered", name)
 	}
 
 	r.factories[name] = factory
+	return nil
 }
 
 func (r *Registry) Create(name string, cfg config.RuleConfig) (Rule, error) {

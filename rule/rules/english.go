@@ -2,6 +2,7 @@ package rules
 
 import (
 	"go/token"
+	"log"
 	"log-linter/rule"
 	"unicode"
 
@@ -38,5 +39,7 @@ func (r *EnglishRule) Check(msg string, pos token.Pos) []analysis.Diagnostic {
 }
 
 func init() {
-	rule.Global.Register(EnglishName, NewEnglishRule)
+	if err := rule.Global.Register(EnglishName, NewEnglishRule); err != nil {
+		log.Printf("failed to register rule %q: %v", EnglishName, err)
+	}
 }
